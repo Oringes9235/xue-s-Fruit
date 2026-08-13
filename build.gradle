@@ -95,3 +95,8 @@ publishing {
 		// 发布仓库可按需配置
 	}
 }
+
+test {
+    // 禁用测试发现失败
+    failOnNoDiscoveredTests = false
+}

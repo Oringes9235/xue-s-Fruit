@@ -1,6 +1,6 @@
-# Xue's Fruit (薛氏水果)
+# Xue's Fruit
 
-一个完整的 Minecraft Fabric 模组，为游戏添加 20 种水果食物、果树种植系统、加工机器、独特效果系统、世界生成、村民交易与成就系统。
+一个 Minecraft Fabric 模组，添加 10 种水果、5 种加工食品与果酒（共 16 种食物物品），并配套果树种植系统、加工机器、独特效果系统、世界生成、村民交易与成就系统。
 
 ---
 
@@ -11,20 +11,21 @@ xues-fruit/
 ├── build.gradle                          # 构建脚本（Fabric Loom）
 ├── settings.gradle                       # Gradle 设置
 ├── gradle.properties                     # 版本号集中管理
+├── fabric_api.json                       # Fabric API 版本信息（JSON 列表）
 ├── LICENSE                               # MIT 开源协议
-├── scripts/
-│   └── generate_resources.py             # 批量资源生成脚本
+├── gradlew / gradlew.bat                 # Gradle Wrapper 启动脚本
+├── gradle/wrapper/                       # Gradle Wrapper 配置（9.2.0）
 ├── src/
 │   ├── main/
 │   │   ├── java/com/xuefengpeng/fruit/
 │   │   │   ├── XuesFruitMod.java              # 主类（服务端入口）
 │   │   │   ├── XuesFruitModClient.java        # 客户端入口
 │   │   │   ├── item/                          # 物品系统
-│   │   │   │   ├── ModItems.java              #   物品注册（20 种）
+│   │   │   │   ├── ModItems.java              #   物品注册（16 种食物）
 │   │   │   │   ├── ModFoodComponents.java     #   食物属性定义
 │   │   │   │   ├── FruitItem.java             #   普通水果
 │   │   │   │   ├── SpecialFruitItem.java      #   特殊水果（榴莲）
-│   │   │   │   ├── FruitJuiceItem.java        #   果汁
+│   │   │   │   ├── FruitJuiceItem.java        #   果汁 / 果酒
 │   │   │   │   └── FruitCombinationItem.java  #   组合食物
 │   │   │   ├── block/                         # 方块系统
 │   │   │   │   ├── ModBlocks.java             #   方块注册
@@ -74,24 +75,26 @@ xues-fruit/
 │   │       └── assets/xuesfruit/
 │   │           ├── lang/                      # 语言文件（en_us / zh_cn）
 │   │           ├── models/                    # 模型 JSON
-│   │           ├── textures/                  # 贴图（需用户补充 PNG）
+│   │           ├── textures/                  # 贴图（需手动补充 PNG）
 │   │           ├── blockstates/               # 方块状态 JSON
 │   │           └── ...
 │   │       └── data/xuesfruit/
 │   │           ├── recipes/                   # 配方 JSON
 │   │           ├── loot_tables/               # 战利品表 JSON
-│   │           ├── advancements/              # 成就 JSON（DataGen 生成）
 │   │           ├── tags/                      # 标签 JSON
 │   │           └── worldgen/                  # 世界生成配置
 │   └── test/java/com/xuefengpeng/fruit/
 │       └── XuesFruitModTest.java              # 单元测试
 ```
 
+> 说明：`data/xuesfruit/advancements/` 目录由 `runDatagen` 运行后自动生成，未提交到仓库。
+
 ---
 
 ## 2. 核心功能
 
-### 食物系统（20 种物品）
+### 食物系统（16 种物品）
+
 | 类别 | 物品 |
 |------|------|
 | 水果类（10） | 香蕉、橙子、葡萄、芒果、草莓、火龙果、榴莲、荔枝、猕猴桃、蓝莓 |
@@ -102,7 +105,7 @@ xues-fruit/
 - 10 种果树苗，5 个生长阶段：`苗 → 幼树 → 成树 → 开花 → 结果`
 - 成熟后周期掉落对应水果
 - 支持骨粉催熟（实现 `Fertilizable` 接口）
-- 要求光照（天空亮度 ≥ 9）与土壤（草方块/泥土/耕地）
+- 要求光照（天空亮度 ≥ 9）与土壤（草方块 / 泥土 / 耕地）
 
 ### 加工机器
 | 机器 | 功能 | GUI |
@@ -112,9 +115,24 @@ xues-fruit/
 | 发酵桶 | 水果 → 果酒（2 分钟） | 无（右键交互） |
 
 ### 效果系统
-- 每种水果独特效果（生命回复、维生素爆发、血糖激增、饱食、幸运、抗火、力量、夜视、清爽提神、免疫强化）
-- 负面效果：榴莲吃多上火
-- 组合 Buff：水果沙拉/蛋糕提供多效果叠加
+每种水果提供独特效果：
+
+| 水果 | 效果 |
+|------|------|
+| 香蕉 | 生命回复 |
+| 橙子 | 维生素爆发（提升攻击力与移速） |
+| 葡萄 | 血糖激增（提升速度） |
+| 芒果 | 饱食 |
+| 草莓 | 幸运 |
+| 火龙果 | 抗火 |
+| 榴莲 | 力量（吃多会上火） |
+| 荔枝 | 夜视 |
+| 猕猴桃 | 清爽提神（提升挖掘速度） |
+| 蓝莓 | 免疫强化（提升生命上限） |
+
+- 果汁：清除负面效果
+- 组合 Buff：水果沙拉 / 水果蛋糕提供多效果叠加
+- 自定义效果：维生素爆发、血糖激增、清爽提神、上火、免疫强化
 
 ### 世界生成
 - 每种水果果树群系生成（DataGen 配置）
@@ -133,13 +151,12 @@ xues-fruit/
 ## 3. 构建与测试指南
 
 ### 前置要求
-- JDK 25（**必须**，Minecraft 26.2 需要 Java 25）
-- Gradle 9.x（**必须**，Gradle 8.x 无法在 JDK 25 上运行）
+- JDK 17（Minecraft 1.20.1 需要 Java 17，见 `fabric.mod.json` 的 `java: >=17`）
 - 网络连接（首次构建需下载依赖）
 
 > ⚠️ **重要**：项目已内置 Gradle Wrapper 并配置为 **Gradle 9.2.0**。
 > 请始终使用 `gradlew` 命令，不要使用系统全局的旧版 `gradle` 命令。
-> 首次运行 `gradlew` 会自动下载 Gradle 9.2.0 发行版（约 130MB）。
+> 首次运行 `gradlew` 会自动下载 Gradle 9.2.0 发行版。
 
 ### 常用命令
 
@@ -147,33 +164,31 @@ xues-fruit/
 ```bash
 .\gradlew.bat --version   # Windows（首次会下载 Gradle 9.2.0）
 ```
-> 若遇到 `Unsupported class file major version 69` 错误，
-> 说明使用了旧版 Gradle（8.x），请改用项目内置的 `gradlew`。
 
 **编译并打包**
 ```bash
 .\gradlew.bat build
-# 产物输出到 build/libs/xuesfruit-1.0.0-1.0.0.jar
+# 产物输出到 build/libs/xuesfruit-1.0.0.jar
 ```
 
 **运行数据生成**
 ```bash
-gradlew runDatagen
+.\gradlew.bat runDatagen
 ```
 
 **启动客户端测试**
 ```bash
-gradlew runClient
+.\gradlew.bat runClient
 ```
 
 **运行单元测试**
 ```bash
-gradlew test
+.\gradlew.bat test
 ```
 
 **清理构建**
 ```bash
-gradlew clean
+.\gradlew.bat clean
 ```
 
 ### 资源贴图补充说明（完整命名清单）
@@ -182,7 +197,7 @@ gradlew clean
 贴图必须严格按以下文件名命名，才能被模型 JSON 正确引用。
 贴图缺失会导致模型渲染为紫黑色（Missing Texture），但不影响编译。
 
-#### 1. 物品贴图（20 种食物，16×16 像素）
+#### 1. 物品贴图（16 种食物，16×16 像素）
 存放目录：`src/main/resources/assets/xuesfruit/textures/item/`
 
 ```
@@ -261,10 +276,11 @@ icon.png        # Mod 图标（推荐 128×128 像素）
 |------|------|
 | Mod | 1.0.0 |
 | Minecraft | 1.20.1 |
-| Fabric Loader | 0.16.12 |
-| Fabric API | 0.112.2+1.26.2 |
-| Yarn Mappings | 26.2+build.1 |
-| Java | 25 |
+| Fabric Loader | 0.15.11 |
+| Fabric API | 0.92.2+1.20.1 |
+| Yarn Mappings | 1.20.1+build.10 |
+| Java | 17 |
+| Gradle Wrapper | 9.2.0 |
 
 ---
 

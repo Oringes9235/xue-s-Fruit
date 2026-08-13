@@ -5,11 +5,11 @@
 	"name": "Xue's Fruit",
 	"description": "添加 20 种水果食物、果树种植、加工机器与独特效果系统的 Fabric 模组。",
 	"authors": [
-		"薛锋鹏"
+		"Xue FengPeng"
 	],
 	"contact": {
-		"homepage": "https://github.com/xuefengpeng/xues-fruit",
-		"sources": "https://github.com/xuefengpeng/xues-fruit"
+		"homepage": "https://github.com/Oringes9235/xue-s-Fruit",
+		"sources": "https://github.com/Oringes9235/xue-s-Fruit"
 	},
 	"license": "MIT",
 	"icon": "assets/xuesfruit/icon.png",
