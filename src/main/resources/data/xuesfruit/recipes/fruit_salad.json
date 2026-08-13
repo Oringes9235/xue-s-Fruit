@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "xuesfruit:orange"
+    },
+    {
+      "item": "xuesfruit:strawberry"
+    },
+    {
+      "item": "xuesfruit:blueberry"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "id": "xuesfruit:fruit_salad",
+    "count": 1
+  }
+}

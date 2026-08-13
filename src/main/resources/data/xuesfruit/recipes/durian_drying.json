@@ -1,0 +1,11 @@
+{
+  "type": "xuesfruit:drying",
+  "ingredient": {
+    "item": "xuesfruit:durian"
+  },
+  "result": {
+    "id": "xuesfruit:dried_fruit",
+    "count": 1
+  },
+  "cookingTime": 200
+}

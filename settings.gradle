@@ -1,0 +1,16 @@
+/**
+ * Gradle 项目设置
+ *
+ * pluginManagement 指定 Fabric 官方仓库，
+ * 用于解析 fabric-loom 插件。
+ */
+pluginManagement {
+	repositories {
+		maven {
+			name = 'Fabric'
+			url = 'https://maven.fabricmc.net/'
+		}
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}

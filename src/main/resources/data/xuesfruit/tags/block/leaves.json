@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "xuesfruit:banana_leaves",
+    "xuesfruit:orange_leaves",
+    "xuesfruit:grape_leaves",
+    "xuesfruit:mango_leaves",
+    "xuesfruit:strawberry_leaves",
+    "xuesfruit:dragon_fruit_leaves",
+    "xuesfruit:durian_leaves",
+    "xuesfruit:lychee_leaves",
+    "xuesfruit:kiwi_leaves",
+    "xuesfruit:blueberry_leaves"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WWW",
+    "WGW",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:oak_planks"
+    },
+    "G": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "id": "xuesfruit:fermentation_barrel",
+    "count": 1
+  }
+}

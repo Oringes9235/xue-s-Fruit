@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "xuesfruit:block/durian_log",
+    "end": "xuesfruit:block/durian_log_top"
+  }
+}

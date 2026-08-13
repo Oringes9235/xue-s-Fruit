@@ -1,0 +1,10 @@
+{
+  "type": "xuesfruit:juicing",
+  "ingredient": {
+    "item": "xuesfruit:kiwi"
+  },
+  "result": {
+    "id": "xuesfruit:fruit_juice",
+    "count": 1
+  }
+}

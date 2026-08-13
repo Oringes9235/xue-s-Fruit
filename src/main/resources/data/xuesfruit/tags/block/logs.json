@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "xuesfruit:banana_log",
+    "xuesfruit:orange_log",
+    "xuesfruit:grape_log",
+    "xuesfruit:mango_log",
+    "xuesfruit:strawberry_log",
+    "xuesfruit:dragon_fruit_log",
+    "xuesfruit:durian_log",
+    "xuesfruit:lychee_log",
+    "xuesfruit:kiwi_log",
+    "xuesfruit:blueberry_log"
+  ]
+}

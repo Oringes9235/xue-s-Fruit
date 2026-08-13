@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "xuesfruit:banana",
+    "xuesfruit:orange",
+    "xuesfruit:grape",
+    "xuesfruit:mango",
+    "xuesfruit:strawberry",
+    "xuesfruit:dragon_fruit",
+    "xuesfruit:durian",
+    "xuesfruit:lychee",
+    "xuesfruit:kiwi",
+    "xuesfruit:blueberry"
+  ]
+}

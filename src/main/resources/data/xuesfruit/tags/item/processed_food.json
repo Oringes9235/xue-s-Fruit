@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "xuesfruit:fruit_juice",
+    "xuesfruit:fruit_jam",
+    "xuesfruit:dried_fruit",
+    "xuesfruit:fruit_salad",
+    "xuesfruit:fruit_cake",
+    "xuesfruit:fruit_wine"
+  ]
+}

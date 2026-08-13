@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "xuesfruit:block/durian_leaves"
+  }
+}

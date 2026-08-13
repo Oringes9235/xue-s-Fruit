@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "growth=0": {
+      "model": "xuesfruit:block/lychee_sapling"
+    },
+    "growth=1": {
+      "model": "xuesfruit:block/lychee_sapling"
+    },
+    "growth=2": {
+      "model": "xuesfruit:block/lychee_sapling"
+    },
+    "growth=3": {
+      "model": "xuesfruit:block/lychee_sapling"
+    },
+    "growth=4": {
+      "model": "xuesfruit:block/lychee_sapling"
+    }
+  }
+}

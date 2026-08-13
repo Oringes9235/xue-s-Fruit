@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "xuesfruit:block/mango_leaves"
+  }
+}

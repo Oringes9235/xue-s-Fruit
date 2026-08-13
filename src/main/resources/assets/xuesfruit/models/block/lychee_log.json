@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "xuesfruit:block/lychee_log",
+    "end": "xuesfruit:block/lychee_log_top"
+  }
+}

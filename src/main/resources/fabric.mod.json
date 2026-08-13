@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "xuesfruit",
+	"version": "${version}",
+	"name": "Xue's Fruit",
+	"description": "添加 20 种水果食物、果树种植、加工机器与独特效果系统的 Fabric 模组。",
+	"authors": [
+		"薛锋鹏"
+	],
+	"contact": {
+		"homepage": "https://github.com/xuefengpeng/xues-fruit",
+		"sources": "https://github.com/xuefengpeng/xues-fruit"
+	},
+	"license": "MIT",
+	"icon": "assets/xuesfruit/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.xuefengpeng.fruit.XuesFruitMod"
+		],
+		"client": [
+			"com.xuefengpeng.fruit.XuesFruitModClient"
+		],
+		"fabric-datagen": [
+			"com.xuefengpeng.fruit.datagen.ModDataGenerator"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

@@ -1,0 +1,97 @@
+/**
+ * ============================================================
+ * Xue's Fruit - Fabric Mod 构建脚本
+ * ============================================================
+ * 使用 Fabric Loom 插件桥接 Minecraft 与 Gradle。
+ *
+ * Minecraft: 1.20.1
+ * 加载器:    Fabric Loader 0.15.11 / Fabric API 0.92.2+1.20.1
+ * 映射:      Yarn 1.20.1+build.10
+ * Java:      17（目标字节码版本）
+ *
+ * 构建命令:
+ *   gradlew build              # 编译并打包
+ *   gradlew runDatagen         # 运行数据生成
+ *   gradlew runClient          # 启动客户端测试
+ *   gradlew test               # 运行单元测试
+ * ============================================================
+ */
+
+plugins {
+	// Fabric Loom 是 Fabric 官方的 Gradle 插件，负责反编译、重映射与运行环境
+	id 'fabric-loom' version '1.9-SNAPSHOT'
+	id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
+
+repositories {
+	// 若需要第三方依赖，可在此处添加额外 Maven 仓库
+}
+
+// -----------------------------------------------------------
+// 数据生成（DataGen）
+// 启用 Fabric API 提供的 runDatagen 运行配置，
+// 生成模型、配方、战利品表、标签、成就等 JSON 资源。
+// -----------------------------------------------------------
+fabricApi {
+	configureDataGeneration()
+}
+
+dependencies {
+	// 官方 Minecraft 依赖（由 Loom 自动解析）
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	// Yarn 官方映射（Fabric 社区维护的中间名）
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	// Fabric Loader（模组加载器）
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	// Fabric API（提供物品组、数据生成、交易、世界生成等大量接口）
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// JUnit 5 单元测试
+	testImplementation "org.junit.jupiter:junit-jupiter:5.10.3"
+	testRuntimeOnly "org.junit.platform:junit-platform-launcher"
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		// 将 fabric.mod.json 中的 ${version} 占位符替换为真实版本号
+		expand "version": inputs.properties.version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	// Minecraft 1.20.1 需要 Java 17 字节码
+	it.options.release = 17
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${project.base.archivesName}" }
+	}
+}
+
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			artifactId = project.archives_base_name
+			from components.java
+		}
+	}
+	repositories {
+		// 发布仓库可按需配置
+	}
+}
