@@ -76,7 +76,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity {
 		if (stack.isEmpty()) {
 			return false;
 		}
-		for (String fruit : ModBlocks.FRUITS) {
+		for (String fruit : ModBlocks.ALL_FRUITS) {
 			if (stack.isOf(Registries.ITEM.get(XuesFruitMod.id(fruit)))) {
 				return true;
 			}

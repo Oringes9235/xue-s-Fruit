@@ -1,11 +1,14 @@
 package com.xuefengpeng.fruit.block;
 
 import com.xuefengpeng.fruit.blockentity.DryerBlockEntity;
+import com.xuefengpeng.fruit.blockentity.ModBlockEntities;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -33,6 +36,11 @@ public class DryerBlock extends BlockWithEntity implements BlockEntityProvider {
 	@Override
 	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.MODEL;
+	}
+
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+		return checkType(type, ModBlockEntities.DRYER_BLOCK_ENTITY, DryerBlockEntity::tick);
 	}
 
 	@Override

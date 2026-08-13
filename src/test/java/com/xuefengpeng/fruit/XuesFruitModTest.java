@@ -56,7 +56,9 @@ class XuesFruitModTest {
 	 */
 	@Test
 	void testFruitCount() {
-		assertEquals(10, com.xuefengpeng.fruit.block.ModBlocks.FRUITS.length);
+		assertEquals(10, com.xuefengpeng.fruit.block.ModBlocks.ALL_FRUITS.length);
+		assertEquals(5, com.xuefengpeng.fruit.block.ModBlocks.TREE_FRUITS.length);
+		assertEquals(5, com.xuefengpeng.fruit.block.ModBlocks.BUSH_FRUITS.length);
 	}
 
 	/**

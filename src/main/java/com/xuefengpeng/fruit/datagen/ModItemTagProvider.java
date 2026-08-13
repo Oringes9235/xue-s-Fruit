@@ -31,7 +31,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 		// 自定义标签：水果
 		TagKey<Item> fruitTag = TagKey.of(RegistryKeys.ITEM, XuesFruitMod.id("fruit"));
 		var fruitBuilder = getOrCreateTagBuilder(fruitTag);
-		for (String fruit : ModBlocks.FRUITS) {
+		for (String fruit : ModBlocks.ALL_FRUITS) {
 			fruitBuilder.add(ModItems.ITEMS.get(fruit));
 		}
 
@@ -40,9 +40,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 		var processedBuilder = getOrCreateTagBuilder(processedTag);
 		processedBuilder.add(ModItems.FRUIT_JUICE);
 		processedBuilder.add(ModItems.FRUIT_JAM);
-		processedBuilder.add(ModItems.DRIED_FRUIT);
 		processedBuilder.add(ModItems.FRUIT_SALAD);
 		processedBuilder.add(ModItems.FRUIT_CAKE);
 		processedBuilder.add(ModItems.FRUIT_WINE);
+		for (String fruit : ModBlocks.ALL_FRUITS) {
+			processedBuilder.add(ModItems.driedItemFor(fruit));
+		}
 	}
 }

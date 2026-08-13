@@ -1,4 +1,3 @@
-
 package com.xuefengpeng.fruit.item;
 
 import com.xuefengpeng.fruit.XuesFruitMod;
@@ -19,9 +18,10 @@ import java.util.Map;
  * ============================================================
  * 物品注册（Minecraft 1.20.1 API）
  * ============================================================
- * 注册本模组 20 种核心物品：
+ * 注册本模组核心物品：
  *   - 水果类（10 种）
- *   - 加工类（果汁 / 果酱 / 果干 / 水果沙拉 / 水果蛋糕）
+ *   - 独立果干（10 种）
+ *   - 加工类（果汁 / 果酱 / 水果沙拉 / 水果蛋糕）
  *   - 果酒（发酵桶产物）
  */
 public final class ModItems {
@@ -58,7 +58,32 @@ public final class ModItems {
 	public static final Item BLUEBERRY = registerFruit("blueberry", ModFoodComponents.BLUEBERRY, "tooltip.xuesfruit.blueberry", false);
 
 	// ---------------------------------------------------------
-	// 加工类（5 种）
+	// 独立果干（10 种）
+	// ---------------------------------------------------------
+
+	public static final Item DRIED_BANANA = register("dried_banana",
+			new Item(new Item.Settings().food(ModFoodComponents.DRIED_FRUIT)));
+	public static final Item DRIED_ORANGE = register("dried_orange",
+			new Item(new Item.Settings().food(ModFoodComponents.DRIED_FRUIT)));
+	public static final Item DRIED_GRAPE = register("dried_grape",
+			new Item(new Item.Settings().food(ModFoodComponents.DRIED_FRUIT)));
+	public static final Item DRIED_MANGO = register("dried_mango",
+			new Item(new Item.Settings().food(ModFoodComponents.DRIED_FRUIT)));
+	public static final Item DRIED_STRAWBERRY = register("dried_strawberry",
+			new Item(new Item.Settings().food(ModFoodComponents.DRIED_FRUIT)));
+	public static final Item DRIED_DRAGON_FRUIT = register("dried_dragon_fruit",
+			new Item(new Item.Settings().food(ModFoodComponents.DRIED_FRUIT)));
+	public static final Item DRIED_DURIAN = register("dried_durian",
+			new Item(new Item.Settings().food(ModFoodComponents.DRIED_FRUIT)));
+	public static final Item DRIED_LYCHEE = register("dried_lychee",
+			new Item(new Item.Settings().food(ModFoodComponents.DRIED_FRUIT)));
+	public static final Item DRIED_KIWI = register("dried_kiwi",
+			new Item(new Item.Settings().food(ModFoodComponents.DRIED_FRUIT)));
+	public static final Item DRIED_BLUEBERRY = register("dried_blueberry",
+			new Item(new Item.Settings().food(ModFoodComponents.DRIED_FRUIT)));
+
+	// ---------------------------------------------------------
+	// 加工类
 	// ---------------------------------------------------------
 
 	/** 果汁 */
@@ -67,9 +92,6 @@ public final class ModItems {
 	/** 果酱 */
 	public static final Item FRUIT_JAM = register("fruit_jam",
 			new Item(new Item.Settings().food(ModFoodComponents.FRUIT_JAM)));
-	/** 果干 */
-	public static final Item DRIED_FRUIT = register("dried_fruit",
-			new Item(new Item.Settings().food(ModFoodComponents.DRIED_FRUIT)));
 	/** 水果沙拉（组合食物） */
 	public static final Item FRUIT_SALAD = register("fruit_salad",
 			new FruitCombinationItem(new Item.Settings().food(ModFoodComponents.FRUIT_SALAD), "tooltip.xuesfruit.fruit_salad"));
@@ -85,37 +107,51 @@ public final class ModItems {
 	public static final Item FRUIT_WINE = register("fruit_wine",
 			new FruitJuiceItem(new Item.Settings().food(ModFoodComponents.FRUIT_JUICE), "tooltip.xuesfruit.fruit_wine"));
 
+	/**
+	 * 根据水果名获取对应的果干物品。
+	 */
+	public static Item driedItemFor(String fruit) {
+		return ITEMS.get("dried_" + fruit);
+	}
+
 	/** 模组物品组 */
 	public static final ItemGroup XUES_FRUIT_GROUP = FabricItemGroup.builder()
 			.icon(() -> new ItemStack(ModItems.ORANGE))
 			.displayName(Text.translatable("itemGroup.xuesfruit"))
 			.entries((displayContext, entries) -> {
 				// 水果
-				entries.add(BANANA);
-				entries.add(ORANGE);
-				entries.add(GRAPE);
-				entries.add(MANGO);
-				entries.add(STRAWBERRY);
-				entries.add(DRAGON_FRUIT);
-				entries.add(DURIAN);
-				entries.add(LYCHEE);
-				entries.add(KIWI);
-				entries.add(BLUEBERRY);
+				for (String fruit : ModBlocks.ALL_FRUITS) {
+					Item item = ITEMS.get(fruit);
+					if (item != null) {
+						entries.add(item);
+					}
+				}
 				// 加工食品
 				entries.add(FRUIT_JUICE);
 				entries.add(FRUIT_JAM);
-				entries.add(DRIED_FRUIT);
 				entries.add(FRUIT_SALAD);
 				entries.add(FRUIT_CAKE);
 				entries.add(FRUIT_WINE);
-				// 方块物品（机器 + 果树）
+				// 独立果干
+				for (String fruit : ModBlocks.ALL_FRUITS) {
+					Item dried = driedItemFor(fruit);
+					if (dried != null) {
+						entries.add(dried);
+					}
+				}
+				// 机器方块
 				entries.add(ModBlocks.BLOCK_ITEMS.get("juicer"));
 				entries.add(ModBlocks.BLOCK_ITEMS.get("dryer"));
 				entries.add(ModBlocks.BLOCK_ITEMS.get("fermentation_barrel"));
-				for (String fruit : ModBlocks.FRUITS) {
+				// 乔木类：树苗 + 树叶 + 原木
+				for (String fruit : ModBlocks.TREE_FRUITS) {
 					entries.add(ModBlocks.BLOCK_ITEMS.get(fruit + "_sapling"));
 					entries.add(ModBlocks.BLOCK_ITEMS.get(fruit + "_leaves"));
 					entries.add(ModBlocks.BLOCK_ITEMS.get(fruit + "_log"));
+				}
+				// 灌木类：果丛
+				for (String fruit : ModBlocks.BUSH_FRUITS) {
+					entries.add(ModBlocks.BLOCK_ITEMS.get(fruit + "_sapling"));
 				}
 			})
 			.build();

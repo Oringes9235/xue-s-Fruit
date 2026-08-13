@@ -11,7 +11,9 @@ import net.minecraft.util.Identifier;
  * ============================================================
  * 烘干机 GUI 渲染（Minecraft 1.20.1 API）
  * ============================================================
- * 负责在客户端绘制烘干机界面背景、进度条与燃料条。
+ * 采用原版熔炉风格布局：
+ *   - 输入槽 (56,17)、燃料槽 (56,53)、输出槽 (116,35)
+ *   - 进度箭头（水平填充）、燃料火焰（竖直填充）
  */
 public class DryerScreen extends HandledScreen<DryerScreenHandler> {
 
@@ -30,18 +32,20 @@ public class DryerScreen extends HandledScreen<DryerScreenHandler> {
 
 		context.drawTexture(TEXTURE, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
 
+		// 处理进度箭头（水平填充，22x16）
 		int progress = this.handler.getProgress();
 		int totalCookTime = this.handler.getTotalCookTime();
 		if (progress > 0 && totalCookTime > 0) {
-			int progressHeight = (int) (progress / (float) totalCookTime * 16);
-			context.drawTexture(TEXTURE, x + 86, y + 35, 176, 0, 22, progressHeight);
+			int progressWidth = (int) (progress / (float) totalCookTime * 22);
+			context.drawTexture(TEXTURE, x + 79, y + 34, 176, 14, progressWidth, 16);
 		}
 
+		// 燃料条（竖直填充，14x14）
 		int burnTime = this.handler.getBurnTime();
 		int maxBurnTime = this.handler.getMaxBurnTime();
 		if (burnTime > 0 && maxBurnTime > 0) {
 			int fuelHeight = (int) (burnTime / (float) maxBurnTime * 14);
-			context.drawTexture(TEXTURE, x + 68, y + 53 + (14 - fuelHeight), 176, 30 - fuelHeight, 14, fuelHeight);
+			context.drawTexture(TEXTURE, x + 56, y + 36 + (14 - fuelHeight), 176, 14 - fuelHeight, 14, fuelHeight);
 		}
 	}
 

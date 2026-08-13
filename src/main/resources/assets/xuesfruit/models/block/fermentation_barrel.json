@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "all": "xuesfruit:block/fermentation_barrel"
+    "top": "xuesfruit:block/fermentation_barrel_top",
+    "side": "xuesfruit:block/fermentation_barrel_side",
+    "bottom": "xuesfruit:block/fermentation_barrel_bottom"
   }
 }

@@ -1,19 +1,16 @@
 {
   "variants": {
-    "growth=0": {
-      "model": "xuesfruit:block/blueberry_sapling"
+    "age=0": {
+      "model": "xuesfruit:block/blueberry_sapling_stage0"
     },
-    "growth=1": {
-      "model": "xuesfruit:block/blueberry_sapling"
+    "age=1": {
+      "model": "xuesfruit:block/blueberry_sapling_stage1"
     },
-    "growth=2": {
-      "model": "xuesfruit:block/blueberry_sapling"
+    "age=2": {
+      "model": "xuesfruit:block/blueberry_sapling_stage2"
     },
-    "growth=3": {
-      "model": "xuesfruit:block/blueberry_sapling"
-    },
-    "growth=4": {
-      "model": "xuesfruit:block/blueberry_sapling"
+    "age=3": {
+      "model": "xuesfruit:block/blueberry_sapling_stage3"
     }
   }
 }

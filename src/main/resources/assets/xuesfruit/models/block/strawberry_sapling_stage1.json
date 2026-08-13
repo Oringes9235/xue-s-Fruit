@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "xuesfruit:block/strawberry_sapling_stage1"
+  }
+}

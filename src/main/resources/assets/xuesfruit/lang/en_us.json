@@ -19,6 +19,17 @@
 	"item.xuesfruit.fruit_cake": "Fruit Cake",
 	"item.xuesfruit.fruit_wine": "Fruit Wine",
 
+	"item.xuesfruit.dried_banana": "Dried Banana",
+	"item.xuesfruit.dried_orange": "Dried Orange",
+	"item.xuesfruit.dried_grape": "Dried Grape",
+	"item.xuesfruit.dried_mango": "Dried Mango",
+	"item.xuesfruit.dried_strawberry": "Dried Strawberry",
+	"item.xuesfruit.dried_dragon_fruit": "Dried Dragon Fruit",
+	"item.xuesfruit.dried_durian": "Dried Durian",
+	"item.xuesfruit.dried_lychee": "Dried Lychee",
+	"item.xuesfruit.dried_kiwi": "Dried Kiwi",
+	"item.xuesfruit.dried_blueberry": "Dried Blueberry",
+
 	"tooltip.xuesfruit.banana": "Restores health over time",
 	"tooltip.xuesfruit.orange": "Vitamin burst: increases attack and speed",
 	"tooltip.xuesfruit.grape": "Sugar rush: increases speed but consumes hunger",

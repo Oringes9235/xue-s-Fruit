@@ -40,8 +40,8 @@ public class DryerScreenHandler extends ScreenHandler {
 		addProperties(delegate);
 
 		if (inventory != null) {
-			this.addSlot(new Slot(inventory, DryerBlockEntity.INPUT_SLOT, 44, 35));
-			this.addSlot(new Slot(inventory, DryerBlockEntity.FUEL_SLOT, 68, 53));
+			this.addSlot(new Slot(inventory, DryerBlockEntity.INPUT_SLOT, 56, 17));
+			this.addSlot(new Slot(inventory, DryerBlockEntity.FUEL_SLOT, 56, 53));
 			this.addSlot(new Slot(inventory, DryerBlockEntity.OUTPUT_SLOT, 116, 35));
 		}
 

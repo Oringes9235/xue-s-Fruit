@@ -33,7 +33,7 @@ public final class ModVillagerTrades {
 	 * 农民购买水果（用绿宝石换取玩家手中的水果）。
 	 */
 	private static void registerFruitTrades() {
-		for (String fruit : com.xuefengpeng.fruit.block.ModBlocks.FRUITS) {
+		for (String fruit : com.xuefengpeng.fruit.block.ModBlocks.ALL_FRUITS) {
 			net.minecraft.item.Item fruitItem = Registries.ITEM.get(XuesFruitMod.id(fruit));
 			TradeOfferHelper.registerVillagerOffers(
 					VillagerProfession.FARMER, 1,
@@ -60,7 +60,7 @@ public final class ModVillagerTrades {
 					factories.add((entity, random) ->
 							new TradeOffer(
 									new ItemStack(Items.EMERALD, 4),
-									new ItemStack(ModItems.DRIED_FRUIT, 2),
+									new ItemStack(ModItems.DRIED_MANGO, 2),
 									8, 5, 0.05f));
 					factories.add((entity, random) ->
 							new TradeOffer(
@@ -74,7 +74,7 @@ public final class ModVillagerTrades {
 	 * 树苗交易。
 	 */
 	private static void registerSaplingTrades() {
-		for (String fruit : com.xuefengpeng.fruit.block.ModBlocks.FRUITS) {
+		for (String fruit : com.xuefengpeng.fruit.block.ModBlocks.ALL_FRUITS) {
 			var sapling = com.xuefengpeng.fruit.block.ModBlocks.BLOCK_ITEMS.get(fruit + "_sapling");
 			TradeOfferHelper.registerVillagerOffers(
 					VillagerProfession.FARMER, 2,

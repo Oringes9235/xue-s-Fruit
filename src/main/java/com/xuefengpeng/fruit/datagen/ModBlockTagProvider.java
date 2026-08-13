@@ -29,7 +29,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 		// 所有树叶加入 minecraft:leaves 标签
 		var leavesBuilder = getOrCreateTagBuilder(BlockTags.LEAVES);
 
-		for (String fruit : ModBlocks.FRUITS) {
+		for (String fruit : ModBlocks.TREE_FRUITS) {
 			logsBuilder.add(ModBlocks.BLOCKS.get(fruit + "_log"));
 			leavesBuilder.add(ModBlocks.BLOCKS.get(fruit + "_leaves"));
 		}

@@ -1,10 +1,8 @@
 package com.xuefengpeng.fruit.worldgen;
 
 import com.mojang.serialization.Codec;
-import com.xuefengpeng.fruit.block.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -32,7 +30,7 @@ public class FruitTreeFeature extends Feature<DefaultFeatureConfig> {
 	}
 
 	/**
-	 * 生成树：在给定位置放置树干与顶部树冠。
+	 * 生成树：复用 FruitTreeGenerator，生成树干 + 较大树冠。
 	 */
 	@Override
 	public boolean generate(FeatureContext<DefaultFeatureConfig> context) {
@@ -40,41 +38,11 @@ public class FruitTreeFeature extends Feature<DefaultFeatureConfig> {
 		BlockPos origin = context.getOrigin();
 		BlockPos basePos = origin.down();
 
-		// 检查地面是否为可种植土壤
 		if (!isSoil(world, basePos)) {
 			return false;
 		}
 
-		// 检查上方空间是否足够
-		for (int y = 1; y <= TRUNK_HEIGHT + 1; y++) {
-			if (!world.getBlockState(origin.up(y)).isAir()) {
-				return false;
-			}
-		}
-
-		// 放置树干
-		BlockState trunkState = ModBlocks.BLOCKS.get(fruit + "_log").getDefaultState();
-		for (int y = 0; y < TRUNK_HEIGHT; y++) {
-			world.setBlockState(origin.up(y), trunkState, 0b11);
-		}
-
-		// 放置树冠（3x3 树叶，顶部一层）。
-		// 将树叶设为持久状态，防止其因距离计算而自然腐烂掉落。
-		BlockState leavesState = ModBlocks.BLOCKS.get(fruit + "_leaves").getDefaultState()
-				.with(LeavesBlock.PERSISTENT, true);
-		BlockPos top = origin.up(TRUNK_HEIGHT);
-		for (int dx = -1; dx <= 1; dx++) {
-			for (int dz = -1; dz <= 1; dz++) {
-				if (Math.abs(dx) == 1 && Math.abs(dz) == 1) {
-					continue; // 四角留空
-				}
-				world.setBlockState(top.add(dx, 0, dz), leavesState, 0b11);
-			}
-		}
-		// 顶部中心的上方再盖一层叶子
-		world.setBlockState(top.up(), leavesState, 0b11);
-
-		return true;
+		return FruitTreeGenerator.generate(world, origin, fruit);
 	}
 
 	/**

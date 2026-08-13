@@ -36,28 +36,12 @@ public final class ModWorldGen {
 	public static final Map<String, Feature<DefaultFeatureConfig>> FEATURES = new LinkedHashMap<>();
 
 	/**
-	 * 现实中为乔木类的水果，在世界中生成果树。
-	 * 其余水果（葡萄、草莓、火龙果、猕猴桃、蓝莓）为灌木/藤本，
-	 * 只生成野生果丛，不生成树。
-	 */
-	public static final String[] TREE_FRUITS = {
-			"banana", "orange", "mango", "durian", "lychee"
-	};
-
-	/**
-	 * 现实中为灌木/藤本的水果，只生成野生果丛。
-	 */
-	public static final String[] BUSH_FRUITS = {
-			"grape", "strawberry", "dragon_fruit", "kiwi", "blueberry"
-	};
-
-	/**
 	 * 主注册入口：注册所有 Feature，并将其加入主世界生成。
 	 */
 	public static void register() {
 		// 注册全部 Feature 类型（树木 + 果丛），
 		// 确保 data 目录中已有的 configured_feature 均能正常解析，避免缺失引用。
-		for (String fruit : ModBlocks.FRUITS) {
+		for (String fruit : ModBlocks.ALL_FRUITS) {
 			registerFeature(fruit + "_tree",
 					new FruitTreeFeature(DefaultFeatureConfig.CODEC, fruit));
 			registerFeature(fruit + "_wild_bush",
@@ -66,10 +50,10 @@ public final class ModWorldGen {
 
 		// 仅按现实形态注入世界生成：
 		// 乔木类水果生成果树，灌木/藤本类水果只生成野生果丛。
-		for (String fruit : TREE_FRUITS) {
+		for (String fruit : ModBlocks.TREE_FRUITS) {
 			addToOverworld(fruit + "_tree");
 		}
-		for (String fruit : BUSH_FRUITS) {
+		for (String fruit : ModBlocks.BUSH_FRUITS) {
 			addToOverworld(fruit + "_wild_bush");
 		}
 	}

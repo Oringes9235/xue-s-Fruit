@@ -26,8 +26,8 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 		addDrop(ModBlocks.DRYER);
 		addDrop(ModBlocks.FERMENTATION_BARREL);
 
-		// 果树方块：原木 / 树苗掉落自身；树叶掉落对应水果而非树叶方块
-		for (String fruit : ModBlocks.FRUITS) {
+		// 乔木类果树方块：原木 / 树苗掉落自身；树叶掉落对应水果而非树叶方块
+		for (String fruit : ModBlocks.TREE_FRUITS) {
 			Block log = ModBlocks.BLOCKS.get(fruit + "_log");
 			Block sapling = ModBlocks.BLOCKS.get(fruit + "_sapling");
 			Block leaves = ModBlocks.BLOCKS.get(fruit + "_leaves");
@@ -39,6 +39,14 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 			Item fruitItem = ModItems.ITEMS.get(fruit);
 			if (fruitItem != null) {
 				addDrop(leaves, fruitItem);
+			}
+		}
+
+		// 灌木/藤本水果果丛：掉落自身方块物品
+		for (String fruit : ModBlocks.BUSH_FRUITS) {
+			Block bush = ModBlocks.BLOCKS.get(fruit + "_sapling");
+			if (bush != null) {
+				addDrop(bush);
 			}
 		}
 	}

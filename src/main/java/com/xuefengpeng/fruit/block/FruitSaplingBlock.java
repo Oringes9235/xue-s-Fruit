@@ -1,5 +1,6 @@
 package com.xuefengpeng.fruit.block;
 
+import com.xuefengpeng.fruit.worldgen.FruitTreeGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,8 +25,8 @@ import net.minecraft.world.WorldView;
  * ============================================================
  * 果树苗（Minecraft 1.20.1 API）
  * ============================================================
- * 果树生长阶段：苗(0) → 幼树(1) → 成树(2) → 开花(3) → 结果(4)。
- * 支持骨粉催熟、光照与土壤检查、结果掉落。
+ * 乔木类水果的树苗。可自然生长为树，也支持骨粉催熟为树。
+ * 生长阶段保留用于展示（苗 → 幼树 → 成树），成熟后掉落水果。
  */
 public class FruitSaplingBlock extends Block implements Fertilizable {
 
@@ -38,7 +39,7 @@ public class FruitSaplingBlock extends Block implements Fertilizable {
 	private static final VoxelShape SAPLING_SHAPE = Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 12.0, 12.0);
 	private static final VoxelShape TREE_SHAPE = Block.createCuboidShape(2.0, 0.0, 2.0, 14.0, 16.0, 14.0);
 
-	public FruitSaplingBlock(Settings settings, Identifier fruitId) {
+	public FruitSaplingBlock(Settings settings, Identifier fruitId, boolean canGrowIntoTree) {
 		super(settings);
 		this.fruitId = fruitId;
 		this.setDefaultState(this.getStateManager().getDefaultState().with(GROWTH, 0));
@@ -51,7 +52,7 @@ public class FruitSaplingBlock extends Block implements Fertilizable {
 
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return state.get(GROWTH) >= 2 ? TREE_SHAPE : SAPLING_SHAPE;
+		return SAPLING_SHAPE;
 	}
 
 	@Override
@@ -84,9 +85,14 @@ public class FruitSaplingBlock extends Block implements Fertilizable {
 		}
 		if (hasEnoughLight(world, pos) && isFertileSoil(world.getBlockState(pos.down()))) {
 			if (random.nextFloat() < 0.15f) {
-				grow(world, pos, state, 1);
+				growStage(world, pos, state, 1);
 			}
 		}
+	}
+
+	private void growStage(ServerWorld world, BlockPos pos, BlockState state, int amount) {
+		int newGrowth = Math.min(4, state.get(GROWTH) + amount);
+		world.setBlockState(pos, state.with(GROWTH, newGrowth), Block.NOTIFY_ALL);
 	}
 
 	private boolean hasEnoughLight(ServerWorld world, BlockPos pos) {
@@ -94,27 +100,28 @@ public class FruitSaplingBlock extends Block implements Fertilizable {
 	}
 
 	// ---------------------------------------------------------
-	// Fertilizable 接口实现（骨粉催熟）
+	// Fertilizable 接口实现（骨粉催熟为树）
 	// ---------------------------------------------------------
 
 	@Override
 	public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-		return state.get(GROWTH) < 4;
+		return true;
 	}
 
 	@Override
 	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
-		return state.get(GROWTH) < 4 && isFertileSoil(world.getBlockState(pos.down()));
+		return isFertileSoil(world.getBlockState(pos.down()));
 	}
 
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-		int amount = random.nextBoolean() ? 1 : 2;
-		grow(world, pos, state, amount);
-	}
-
-	private void grow(ServerWorld world, BlockPos pos, BlockState state, int amount) {
-		int newGrowth = Math.min(4, state.get(GROWTH) + amount);
+		String fruit = fruitId.getPath();
+		// 骨粉催熟：直接生成一棵完整果树
+		if (FruitTreeGenerator.generate(world, pos, fruit)) {
+			return;
+		}
+		// 若空间不足，退化为提升一个生长阶段
+		int newGrowth = Math.min(4, state.get(GROWTH) + 1);
 		world.setBlockState(pos, state.with(GROWTH, newGrowth), Block.NOTIFY_ALL);
 	}
 

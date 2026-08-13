@@ -40,8 +40,8 @@ public class JuicerScreenHandler extends ScreenHandler {
 		addProperties(delegate);
 
 		if (inventory != null) {
-			this.addSlot(new Slot(inventory, JuicerBlockEntity.INPUT_SLOT, 44, 35));
-			this.addSlot(new Slot(inventory, JuicerBlockEntity.FUEL_SLOT, 68, 53));
+			this.addSlot(new Slot(inventory, JuicerBlockEntity.INPUT_SLOT, 56, 17));
+			this.addSlot(new Slot(inventory, JuicerBlockEntity.FUEL_SLOT, 56, 53));
 			this.addSlot(new Slot(inventory, JuicerBlockEntity.OUTPUT_SLOT, 116, 35));
 		}
 

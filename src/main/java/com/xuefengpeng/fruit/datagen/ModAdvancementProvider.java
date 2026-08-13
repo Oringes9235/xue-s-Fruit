@@ -67,7 +67,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
 		// 4. 收集所有果树
 		Advancement collectAllTrees = Advancement.Builder.create()
 				.display(
-						ModBlocks.BLOCK_ITEMS.get("dragon_fruit_log").getDefaultStack(),
+						ModBlocks.BLOCK_ITEMS.get("lychee_log").getDefaultStack(),
 						Text.translatable("advancements.xuesfruit.collect_all_trees.title"),
 						Text.translatable("advancements.xuesfruit.collect_all_trees.description"),
 						(Identifier) null,
