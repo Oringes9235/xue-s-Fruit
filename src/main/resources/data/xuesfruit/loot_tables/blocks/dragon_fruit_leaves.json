@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "xuesfruit:dragon_fruit_leaves"
+          "name": "xuesfruit:dragon_fruit"
         }
       ],
       "conditions": [

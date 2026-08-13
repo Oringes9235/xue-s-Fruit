@@ -28,6 +28,7 @@ public final class ModFoodComponents {
 			.hunger(4)
 			.saturationModifier(0.3f)
 			.statusEffect(FruitEffects.bananaEffect(), 1.0f)
+			.alwaysEdible()
 			.build();
 
 	/** 橙子 */
@@ -35,6 +36,7 @@ public final class ModFoodComponents {
 			.hunger(4)
 			.saturationModifier(0.4f)
 			.statusEffect(FruitEffects.orangeEffect(), 1.0f)
+			.alwaysEdible()
 			.build();
 
 	/** 葡萄 */
@@ -42,6 +44,7 @@ public final class ModFoodComponents {
 			.hunger(2)
 			.saturationModifier(0.2f)
 			.statusEffect(FruitEffects.grapeEffect(), 1.0f)
+			.alwaysEdible()
 			.build();
 
 	/** 芒果 */
@@ -49,6 +52,7 @@ public final class ModFoodComponents {
 			.hunger(5)
 			.saturationModifier(0.5f)
 			.statusEffect(FruitEffects.mangoEffect(), 1.0f)
+			.alwaysEdible()
 			.build();
 
 	/** 草莓 */
@@ -56,6 +60,7 @@ public final class ModFoodComponents {
 			.hunger(3)
 			.saturationModifier(0.3f)
 			.statusEffect(FruitEffects.strawberryEffect(), 1.0f)
+			.alwaysEdible()
 			.build();
 
 	/** 火龙果 */
@@ -63,6 +68,7 @@ public final class ModFoodComponents {
 			.hunger(5)
 			.saturationModifier(0.5f)
 			.statusEffect(FruitEffects.dragonFruitEffect(), 1.0f)
+			.alwaysEdible()
 			.build();
 
 	/** 榴莲 */
@@ -70,6 +76,7 @@ public final class ModFoodComponents {
 			.hunger(7)
 			.saturationModifier(0.6f)
 			.statusEffect(FruitEffects.durianEffect(), 1.0f)
+			.alwaysEdible()
 			.build();
 
 	/** 荔枝 */
@@ -77,6 +84,7 @@ public final class ModFoodComponents {
 			.hunger(3)
 			.saturationModifier(0.3f)
 			.statusEffect(FruitEffects.lycheeEffect(), 1.0f)
+			.alwaysEdible()
 			.build();
 
 	/** 猕猴桃 */
@@ -84,6 +92,7 @@ public final class ModFoodComponents {
 			.hunger(4)
 			.saturationModifier(0.4f)
 			.statusEffect(FruitEffects.kiwiEffect(), 1.0f)
+			.alwaysEdible()
 			.build();
 
 	/** 蓝莓 */
@@ -91,6 +100,7 @@ public final class ModFoodComponents {
 			.hunger(3)
 			.saturationModifier(0.3f)
 			.statusEffect(FruitEffects.blueberryEffect(), 1.0f)
+			.alwaysEdible()
 			.build();
 
 	// ---------------------------------------------------------

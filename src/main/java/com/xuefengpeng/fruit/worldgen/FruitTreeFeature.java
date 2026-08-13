@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.xuefengpeng.fruit.block.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -57,8 +58,10 @@ public class FruitTreeFeature extends Feature<DefaultFeatureConfig> {
 			world.setBlockState(origin.up(y), trunkState, 0b11);
 		}
 
-		// 放置树冠（3x3 树叶，顶部一层）
-		BlockState leavesState = ModBlocks.BLOCKS.get(fruit + "_leaves").getDefaultState();
+		// 放置树冠（3x3 树叶，顶部一层）。
+		// 将树叶设为持久状态，防止其因距离计算而自然腐烂掉落。
+		BlockState leavesState = ModBlocks.BLOCKS.get(fruit + "_leaves").getDefaultState()
+				.with(LeavesBlock.PERSISTENT, true);
 		BlockPos top = origin.up(TRUNK_HEIGHT);
 		for (int dx = -1; dx <= 1; dx++) {
 			for (int dz = -1; dz <= 1; dz++) {

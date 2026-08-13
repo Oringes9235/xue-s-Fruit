@@ -1,8 +1,11 @@
 package com.xuefengpeng.fruit.datagen;
 
 import com.xuefengpeng.fruit.block.ModBlocks;
+import com.xuefengpeng.fruit.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 
 /**
  * ============================================================
@@ -23,11 +26,20 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 		addDrop(ModBlocks.DRYER);
 		addDrop(ModBlocks.FERMENTATION_BARREL);
 
-		// 果树方块：掉落自身
+		// 果树方块：原木 / 树苗掉落自身；树叶掉落对应水果而非树叶方块
 		for (String fruit : ModBlocks.FRUITS) {
-			addDrop(ModBlocks.BLOCKS.get(fruit + "_log"));
-			addDrop(ModBlocks.BLOCKS.get(fruit + "_sapling"));
-			addDrop(ModBlocks.BLOCKS.get(fruit + "_leaves"));
+			Block log = ModBlocks.BLOCKS.get(fruit + "_log");
+			Block sapling = ModBlocks.BLOCKS.get(fruit + "_sapling");
+			Block leaves = ModBlocks.BLOCKS.get(fruit + "_leaves");
+
+			addDrop(log);
+			addDrop(sapling);
+
+			// 树叶不会掉落自身，只掉落成熟水果
+			Item fruitItem = ModItems.ITEMS.get(fruit);
+			if (fruitItem != null) {
+				addDrop(leaves, fruitItem);
+			}
 		}
 	}
 }

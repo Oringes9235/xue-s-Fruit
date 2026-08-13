@@ -36,6 +36,10 @@ public class FruitLeavesBlock extends LeavesBlock {
 	public FruitLeavesBlock(Settings settings, Identifier fruitId) {
 		super(settings);
 		this.fruitId = fruitId;
+		// 果树叶默认即为持久状态：不会因距离计算而自然腐烂掉落，
+		// 只会通过结果机制掉落水果。树叶方块本身不掉落。
+		this.setDefaultState(this.getStateManager().getDefaultState()
+				.with(LeavesBlock.PERSISTENT, true));
 	}
 
 	/**

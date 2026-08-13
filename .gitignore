@@ -37,6 +37,7 @@ classes/
 # ============================================================
 *.log
 build_log.txt
+*.py
 
 # Modrinth 查询缓存
 # fabric_api.json

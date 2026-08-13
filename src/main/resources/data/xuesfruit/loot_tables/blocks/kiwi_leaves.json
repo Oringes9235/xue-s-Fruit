@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "xuesfruit:kiwi_leaves"
+          "name": "xuesfruit:kiwi"
         }
       ],
       "conditions": [
