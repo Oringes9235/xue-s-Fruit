@@ -19,9 +19,12 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
+import net.minecraft.item.ItemPlacementContext;
 
 /**
  * ============================================================
@@ -46,6 +49,30 @@ public class FruitBushBlock extends Block implements Fertilizable {
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 		builder.add(AGE);
+	}
+
+	@Override
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+		return isFertileSoil(world.getBlockState(pos.down()));
+	}
+
+	@Override
+	public BlockState getPlacementState(ItemPlacementContext ctx) {
+		BlockState state = super.getPlacementState(ctx);
+		return state != null && state.canPlaceAt(ctx.getWorld(), ctx.getBlockPos()) ? state : null;
+	}
+
+	private boolean isFertileSoil(BlockState state) {
+		return state.isOf(Blocks.GRASS_BLOCK)
+				|| state.isOf(Blocks.DIRT)
+				|| state.isOf(Blocks.FARMLAND);
+	}
+
+	@Override
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
+		return !state.canPlaceAt(world, pos)
+				? Blocks.AIR.getDefaultState()
+				: super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
 	}
 
 	@Override
