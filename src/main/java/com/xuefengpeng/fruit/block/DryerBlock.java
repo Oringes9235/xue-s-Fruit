@@ -5,7 +5,7 @@ import com.xuefengpeng.fruit.blockentity.ModBlockEntities;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -22,7 +22,7 @@ import net.minecraft.world.World;
  * ============================================================
  * 带方块实体的加工机器。右键打开 GUI。
  */
-public class DryerBlock extends BlockWithEntity implements BlockEntityProvider {
+public class DryerBlock extends HorizontalFacingBlock implements BlockEntityProvider {
 
 	public DryerBlock(Settings settings) {
 		super(settings);
@@ -39,8 +39,12 @@ public class DryerBlock extends BlockWithEntity implements BlockEntityProvider {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-		return checkType(type, ModBlockEntities.DRYER_BLOCK_ENTITY, DryerBlockEntity::tick);
+		if (type == ModBlockEntities.DRYER_BLOCK_ENTITY) {
+			return (BlockEntityTicker<T>) (BlockEntityTicker<DryerBlockEntity>) DryerBlockEntity::tick;
+		}
+		return null;
 	}
 
 	@Override

@@ -4,7 +4,7 @@
     "item": "xuesfruit:mango"
   },
   "result": {
-    "id": "xuesfruit:dried_mango",
+    "item": "xuesfruit:dried_mango",
     "count": 1
   },
   "cookingTime": 200

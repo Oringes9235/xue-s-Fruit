@@ -5,7 +5,7 @@ import com.xuefengpeng.fruit.blockentity.ModBlockEntities;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.HorizontalFacingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -22,7 +22,7 @@ import net.minecraft.world.World;
  * ============================================================
  * 带方块实体的加工机器。右键打开 GUI。
  */
-public class JuicerBlock extends BlockWithEntity implements BlockEntityProvider {
+public class JuicerBlock extends HorizontalFacingBlock implements BlockEntityProvider {
 
 	public JuicerBlock(Settings settings) {
 		super(settings);
@@ -39,8 +39,12 @@ public class JuicerBlock extends BlockWithEntity implements BlockEntityProvider 
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-		return checkType(type, ModBlockEntities.JUICER_BLOCK_ENTITY, JuicerBlockEntity::tick);
+		if (type == ModBlockEntities.JUICER_BLOCK_ENTITY) {
+			return (BlockEntityTicker<T>) (BlockEntityTicker<JuicerBlockEntity>) JuicerBlockEntity::tick;
+		}
+		return null;
 	}
 
 	@Override

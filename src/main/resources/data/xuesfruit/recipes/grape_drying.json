@@ -4,7 +4,7 @@
     "item": "xuesfruit:grape"
   },
   "result": {
-    "id": "xuesfruit:dried_grape",
+    "item": "xuesfruit:dried_grape",
     "count": 1
   },
   "cookingTime": 200

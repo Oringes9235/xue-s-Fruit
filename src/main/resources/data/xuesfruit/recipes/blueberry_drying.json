@@ -4,7 +4,7 @@
     "item": "xuesfruit:blueberry"
   },
   "result": {
-    "id": "xuesfruit:dried_blueberry",
+    "item": "xuesfruit:dried_blueberry",
     "count": 1
   },
   "cookingTime": 200

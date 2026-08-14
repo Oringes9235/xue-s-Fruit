@@ -77,15 +77,18 @@ public class FruitSaplingBlock extends Block implements Fertilizable {
 			return;
 		}
 		int growth = state.get(GROWTH);
-		if (growth >= 4) {
+		// 已长成幼树/成树阶段，仍有概率继续生长为完整果树
+		if (hasEnoughLight(world, pos) && isFertileSoil(world.getBlockState(pos.down()))) {
+			if (random.nextFloat() < 0.1f) {
+				// 尝试长成完整果树；空间不足则退化为提升一个生长阶段
+				if (!FruitTreeGenerator.generate(world, pos, fruitId.getPath())) {
+					growStage(world, pos, state, 1);
+				}
+			}
+		} else if (growth >= 4) {
+			// 无光照/土壤时的结果回落：仍有少量概率掉落水果
 			if (random.nextFloat() < 0.2f) {
 				dropFruit(world, pos);
-			}
-			return;
-		}
-		if (hasEnoughLight(world, pos) && isFertileSoil(world.getBlockState(pos.down()))) {
-			if (random.nextFloat() < 0.15f) {
-				growStage(world, pos, state, 1);
 			}
 		}
 	}

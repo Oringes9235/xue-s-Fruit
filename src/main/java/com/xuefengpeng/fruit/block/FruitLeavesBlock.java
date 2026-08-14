@@ -1,7 +1,7 @@
 package com.xuefengpeng.fruit.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,14 +15,15 @@ import net.minecraft.util.math.random.Random;
  * ============================================================
  * 果树叶
  * ============================================================
- * 继承原版树叶方块。特性：
+ * 普通透明树叶方块（不继承原版 LeavesBlock，因此不可含水）。
+ * 特性：
  *   - 随机刻：有概率在叶片位置生成成熟果实掉落物
- *   - 破坏时可能掉落果实与树苗（由战利品表控制）
+ *   - 破坏时可能掉落果实（由战利品表控制）
  *
  * 使用水果的物品 Identifier（而非直接引用物品对象），
  * 避免物品-方块之间的类初始化顺序依赖。
  */
-public class FruitLeavesBlock extends LeavesBlock {
+public class FruitLeavesBlock extends Block {
 
 	/** 该树叶对应掉落的水果物品 ID */
 	private final Identifier fruitId;
@@ -36,10 +37,6 @@ public class FruitLeavesBlock extends LeavesBlock {
 	public FruitLeavesBlock(Settings settings, Identifier fruitId) {
 		super(settings);
 		this.fruitId = fruitId;
-		// 果树叶默认即为持久状态：不会因距离计算而自然腐烂掉落，
-		// 只会通过结果机制掉落水果。树叶方块本身不掉落。
-		this.setDefaultState(this.getStateManager().getDefaultState()
-				.with(LeavesBlock.PERSISTENT, true));
 	}
 
 	/**
@@ -56,7 +53,6 @@ public class FruitLeavesBlock extends LeavesBlock {
 	 */
 	@Override
 	public void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		super.randomTick(state, world, pos, random);
 		// 5% 概率结果
 		if (random.nextFloat() < 0.05f) {
 			dropFruit(world, pos);

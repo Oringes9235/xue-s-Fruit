@@ -93,6 +93,7 @@ public final class ModBlocks {
 				AbstractBlock.Settings.create()
 						.mapColor(MapColor.DARK_GREEN)
 						.noCollision()
+						.nonOpaque()
 						.ticksRandomly()
 						.breakInstantly()
 						.sounds(BlockSoundGroup.GRASS),
@@ -129,6 +130,7 @@ public final class ModBlocks {
 				AbstractBlock.Settings.create()
 						.mapColor(MapColor.DARK_GREEN)
 						.noCollision()
+						.nonOpaque()
 						.ticksRandomly()
 						.breakInstantly()
 						.sounds(BlockSoundGroup.SWEET_BERRY_BUSH),

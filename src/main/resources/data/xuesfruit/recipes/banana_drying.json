@@ -4,7 +4,7 @@
     "item": "xuesfruit:banana"
   },
   "result": {
-    "id": "xuesfruit:dried_banana",
+    "item": "xuesfruit:dried_banana",
     "count": 1
   },
   "cookingTime": 200

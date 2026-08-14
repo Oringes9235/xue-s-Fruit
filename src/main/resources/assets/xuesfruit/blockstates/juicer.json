@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "xuesfruit:block/juicer",
+      "y": 90
+    },
+    "facing=north": {
       "model": "xuesfruit:block/juicer"
+    },
+    "facing=south": {
+      "model": "xuesfruit:block/juicer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "xuesfruit:block/juicer",
+      "y": 270
     }
   }
 }

@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/orientable",
   "textures": {
-    "all": "xuesfruit:block/juicer"
+    "top": "xuesfruit:machine/juicer_top",
+    "front": "xuesfruit:machine/juicer_front",
+    "side": "xuesfruit:machine/juicer_side"
   }
 }
