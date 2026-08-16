@@ -1,8 +1,10 @@
 package com.xuefengpeng.fruit.block;
 
+import com.xuefengpeng.fruit.entity.FallingFruitItemEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.ItemEntity;
+import net.minecraft.block.EntityShapeContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -10,6 +12,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.BlockView;
 
 /**
  * ============================================================
@@ -48,6 +53,20 @@ public class FruitLeavesBlock extends Block {
 	}
 
 	/**
+	 * 碰撞形状：自然掉落的水果（FallingFruitItemEntity）返回空碰撞箱，
+	 * 使其能够穿透树叶落到地面；其它实体（包括玩家丢弃的掉落物）保持
+	 * 正常的实体碰撞。
+	 */
+	@Override
+	public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+		if (context instanceof EntityShapeContext entityContext
+				&& entityContext.getEntity() instanceof FallingFruitItemEntity) {
+			return VoxelShapes.empty();
+		}
+		return super.getCollisionShape(state, world, pos, context);
+	}
+
+	/**
 	 * 随机刻：模拟"结果"阶段，在树叶位置生成水果掉落物。
 	 * 仅在服务端执行，保证掉落物刷新。
 	 */
@@ -67,7 +86,7 @@ public class FruitLeavesBlock extends Block {
 		if (fruit == null) {
 			return;
 		}
-		ItemEntity itemEntity = new ItemEntity(
+		FallingFruitItemEntity itemEntity = FallingFruitItemEntity.drop(
 				world,
 				pos.getX() + 0.5,
 				pos.getY(),

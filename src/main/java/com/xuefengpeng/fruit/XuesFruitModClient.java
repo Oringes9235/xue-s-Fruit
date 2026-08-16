@@ -4,14 +4,17 @@ import com.xuefengpeng.fruit.block.FruitBushBlock;
 import com.xuefengpeng.fruit.block.FruitLeavesBlock;
 import com.xuefengpeng.fruit.block.FruitSaplingBlock;
 import com.xuefengpeng.fruit.block.ModBlocks;
+import com.xuefengpeng.fruit.entity.ModEntities;
 import com.xuefengpeng.fruit.screen.JuicerScreen;
 import com.xuefengpeng.fruit.screen.DryerScreen;
 import com.xuefengpeng.fruit.screen.ModScreenHandlers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.entity.ItemEntityRenderer;
 
 /**
  * ============================================================
@@ -28,6 +31,9 @@ public class XuesFruitModClient implements ClientModInitializer {
 	 */
 	@Override
 	public void onInitializeClient() {
+		// 自然掉落水果：复用原版掉落物渲染器
+		EntityRendererRegistry.register(ModEntities.FALLING_FRUIT_ITEM, ItemEntityRenderer::new);
+
 		// 榨汁机 GUI
 		HandledScreens.register(ModScreenHandlers.JUICER_SCREEN_HANDLER, JuicerScreen::new);
 		// 烘干机 GUI

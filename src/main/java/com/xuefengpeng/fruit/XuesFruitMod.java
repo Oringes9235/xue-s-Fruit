@@ -3,6 +3,7 @@ package com.xuefengpeng.fruit;
 import com.xuefengpeng.fruit.block.ModBlocks;
 import com.xuefengpeng.fruit.blockentity.ModBlockEntities;
 import com.xuefengpeng.fruit.effect.ModEffects;
+import com.xuefengpeng.fruit.entity.ModEntities;
 import com.xuefengpeng.fruit.item.ModItems;
 import com.xuefengpeng.fruit.recipe.ModRecipes;
 import com.xuefengpeng.fruit.screen.ModScreenHandlers;
@@ -68,6 +69,9 @@ public class XuesFruitMod implements ModInitializer {
 
 		// 4. 方块实体
 		ModBlockEntities.register();
+
+		// 4.5 实体（自然掉落水果，需在客户端与服务端均完成注册）
+		ModEntities.register();
 
 		// 5. 屏幕处理器（GUI）
 		ModScreenHandlers.register();
