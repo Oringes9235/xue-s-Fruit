@@ -10,10 +10,13 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.state.StateManager;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 /**
@@ -26,6 +29,18 @@ public class DryerBlock extends HorizontalFacingBlock implements BlockEntityProv
 
 	public DryerBlock(Settings settings) {
 		super(settings);
+		// 注册 facing 属性并设置默认朝向，否则 blockstate 无法匹配变体，方块会渲染为黑紫块。
+		this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
+	}
+
+	@Override
+	public BlockState getPlacementState(ItemPlacementContext ctx) {
+		return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+	}
+
+	@Override
+	protected void appendProperties(StateManager.Builder<net.minecraft.block.Block, BlockState> builder) {
+		builder.add(FACING);
 	}
 
 	@Override

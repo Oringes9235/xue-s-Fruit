@@ -1,8 +1,9 @@
 {
   "parent": "minecraft:block/orientable",
   "textures": {
-    "top": "xuesfruit:machine/dryer_top",
-    "front": "xuesfruit:machine/dryer_front",
-    "side": "xuesfruit:machine/dryer_side"
+    "top": "xuesfruit:block/dryer_top",
+    "front": "xuesfruit:block/dryer_front",
+    "side": "xuesfruit:block/dryer_side",
+    "bottom": "xuesfruit:block/dryer_side"
   }
 }

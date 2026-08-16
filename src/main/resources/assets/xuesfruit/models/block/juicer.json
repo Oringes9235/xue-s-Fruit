@@ -1,8 +1,9 @@
 {
   "parent": "minecraft:block/orientable",
   "textures": {
-    "top": "xuesfruit:machine/juicer_top",
-    "front": "xuesfruit:machine/juicer_front",
-    "side": "xuesfruit:machine/juicer_side"
+    "top": "xuesfruit:block/juicer_top",
+    "front": "xuesfruit:block/juicer_front",
+    "side": "xuesfruit:block/juicer_side",
+    "bottom": "xuesfruit:block/juicer_side"
   }
 }
